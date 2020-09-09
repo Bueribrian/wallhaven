@@ -6,7 +6,7 @@ import { SectionHeader } from '../components/StyledComponents'
 import Wallpapers from "../components/Wallpapers";
 
 export default function Home() {
-  const { images, mostviewed, topImages } = useContext(SearchContext)
+  const { images, mostviewed, topImages, topImagesLoaded,  mostViewedLoaded } = useContext(SearchContext)
 
 
   return (
@@ -15,12 +15,12 @@ export default function Home() {
         <h2>Top images</h2>
         <Link to='/top'>View more</Link>
       </SectionHeader>
-      <Wallpapers type='top' images={topImages} />
+      <Wallpapers type='top' loaded={topImagesLoaded} images={topImages} />
       <SectionHeader background='#569FFF' xaling='space-between' yaling='center' color='white'>
         <h2>Most viewed</h2>
         <Link to='/popular'>View more</Link>
       </SectionHeader>
-      <Wallpapers type='default' images={mostviewed} />
+      <Wallpapers type='default' loaded={mostViewedLoaded} images={mostviewed} />
     </div>
   );
 }

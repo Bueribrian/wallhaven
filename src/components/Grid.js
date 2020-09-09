@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useContext} from "react";
+import { ThemeContext } from '../context/ThemeProvider';
 import styled from "styled-components";
 
 const GridSystem = styled.div`
   width: 100%;
   display: grid;
+  transition: 3s all;
   grid-template-areas:
    "header"
    "sidebar"
@@ -17,7 +19,7 @@ const GridSystem = styled.div`
     }
 
     @media only screen and (min-width: 600px)   {
-        grid-template-columns: 15% auto 120px;
+        grid-template-columns: ${props => props.navOpen ? '15% 80%' : '0% 95%' } 5%;
         grid-template-areas:
                         "sidebar  header  header"
                         "sidebar content content";
@@ -39,7 +41,10 @@ const GridBo = styled.div`
 `;
 
 export function Grid(props) {
-  return <GridSystem>{props.children}</GridSystem>;
+  const { navOpen } = useContext(ThemeContext)
+
+
+  return <GridSystem navOpen={navOpen}>{props.children}</GridSystem>;
 }
 export function GridNavbar(props) {
   return <GridNav>{props.children}</GridNav>;

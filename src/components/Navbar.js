@@ -1,9 +1,31 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
-import { SearchContext } from "../context/SearchContext";
+import { SearchContext, SearchDispatch } from "../context/SearchContext";
 import { ThemeDispatchContext, ThemeContext } from "../context/ThemeProvider";
 import { Badge } from "../components/StyledComponents";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+
+
+
+const NavbarTop = styled.div `
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  padding: 0px 15px;
+`
+
+const InputSearch = styled.input`
+ max-width: 520px;
+ min-width: 300px;
+ padding: 0px 15px;
+ height: 40px;
+ background: rgba(0,0,0,0.2);
+ border:none;
+ font-family: 'Raleway', sans-serif;
+ 
+`
+
 
 const ThemePicker = styled.div`
   position: relative;
@@ -54,12 +76,13 @@ const NavSections = styled.div`
 `;
 
 export default function Navbar() {
-  const [searchParameter, setSearchParameter] = useState("");
-  const { search, setSearch } = useContext(SearchContext);
-  const { setTheme } = useContext(ThemeDispatchContext);
-  const { theme } = useContext(ThemeContext);
+  const { searchWord, setSearchWord } = useContext(SearchDispatch);
+  const { setTheme, setNavOpen } = useContext(ThemeDispatchContext);
+  const { theme, navOpen } = useContext(ThemeContext);
   const { setPage } = useContext(SearchContext);
   const { setWallpapers } = useContext(SearchContext);
+
+  const [searchParam, setSearchParam] = useState('')
 
   const changeTheme = () => {
     if (theme === "dark") {
@@ -69,18 +92,37 @@ export default function Navbar() {
     }
   };
 
-  const searchWallpapers = () => {
-    setWallpapers([]);
-    setSearch(searchParameter);
-    setPage(1);
-  };
+  // const searchWallpapers = (searchParameter) => {
+  //   setWallpapers([]);
+  //   setSearchWord(searchParameter);
+  //   setPage(1);
+  // };
+
+  const handleForm = (e) => {
+    console.log('Preveni el default?')
+    window.location.href=`/search/top/${searchParam}`
+    e.preventDefault()
+  }
+
+  const handleInput = (e) => {
+    setSearchParam(e.target.value)
+    e.preventDefault();
+  }
+
 
   return (
     <div>
-      <div>
+      <NavbarTop>
+        
         <div>
-          <Link to="/">Home</Link>
+          <div>
+            <i onClick={()=>{setNavOpen(!navOpen)}} className="fas fa-bars"></i>
+          </div>
+          <Link to="/">Wallparadise</Link>
         </div>
+        <form onSubmit={handleForm}>
+          <InputSearch onChange={handleInput} placeholder='Search something...' />
+        </form>
         <ThemePicker
           onClick={changeTheme}
           className={theme === "light" ? "active" : ""}
@@ -88,7 +130,10 @@ export default function Navbar() {
           <i className="fas fa-sun"></i>
           <i className="fas fa-moon"></i>
         </ThemePicker>
-      </div>
+      </NavbarTop>
+
+
+
       <NavSections>
         <Badge background="#6B2AB5">
           <Link to="/top">Top</Link>

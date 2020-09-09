@@ -16,15 +16,22 @@ const CardWrapper = styled.div`
         opacity:1;
         transition: .3s all;
     }
+    &:hover img{
+      transform: scale(1.1);
+      transition: .3s all;
+    }
 `;
 const CardFront = styled.div`
         width: 100%;
         height: 100%;
+        min-height: 220px;
 
     & img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        transition: .3s all;
+
     }
     
 `;
@@ -38,6 +45,13 @@ const CardBack = styled.div`
     opacity:0;
     transition: .3s all;
     z-index: 3;
+
+    & .fav {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      z-index:25;
+    }
     & .category {
       margin: 10px;
       text-transform: capitalize;
@@ -96,11 +110,11 @@ export default function ImageComponent(props) {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    console.log(props);
+    // console.log(props);
     setLoaded(true);
   }, []);
 
   return (
-    <>{loaded ? <Card fav={fav} src={props.image} id={id} category={category} resolution={resolution} views={views} /> : <WallLoader />}</>
+    <>{ loaded ? <Card fav={fav} src={props.image} id={id} category={category} resolution={resolution} views={views} /> : <WallLoader />}</>
   );
 }

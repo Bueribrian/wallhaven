@@ -12,7 +12,7 @@ export default function Wall() {
     const getImage = () => {
         axios
           .get(
-            `http://localhost:3001/search/wall/${wallid}`
+            `https://wallhaven-api.herokuapp.com/search/wall/${wallid}`
           )
           .then((response) => {
             console.log(response.data.data.thumbs.original);
