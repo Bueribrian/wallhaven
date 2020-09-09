@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import { SearchContext } from "../context/SearchContext";
-import { ThemeContext } from "../context/ThemeProvider";
+// import { ThemeContext } from "../context/ThemeProvider";
 import { Link } from "react-router-dom";
 import { SectionHeader } from '../components/StyledComponents'
 import Wallpapers from "../components/Wallpapers";
 
 export default function Home() {
-  const { images, mostviewed, topImages, topImagesLoaded,  mostViewedLoaded } = useContext(SearchContext)
+  // const { images, mostviewed, topImages, topImagesLoaded,  mostViewedLoaded } = useContext(SearchContext)
+  const {  mostviewed, topImages, topImagesLoaded,  mostViewedLoaded } = useContext(SearchContext)
 
 
   return (

@@ -5,7 +5,7 @@ import { GridImagesWrapper } from '../components/StyledComponents';
 
 export default function Wallpapers(props) {
   const handleImageThumbs = (index, type, image) =>{
-    return index === 1 && type === 'top' || index === 5 && type === 'top' ? image.path : image.thumbs.small
+    return (index === 1 && type === 'top') || (index === 5 && type === 'top') ? image.path : image.thumbs.small
   }
 
   

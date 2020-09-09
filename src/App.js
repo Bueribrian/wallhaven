@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React from 'react'
 import UserProvider from './context/UserProvider'
 import Application from './Application'
 

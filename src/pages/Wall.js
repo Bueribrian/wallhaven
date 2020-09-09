@@ -23,7 +23,9 @@ export default function Wall() {
     
     
     useEffect(()=>{
+
       getImage()
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
   return <div style={{width: '95%', height: '95%', margin:'0 auto'}}>

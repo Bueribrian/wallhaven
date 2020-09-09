@@ -1,12 +1,12 @@
-import React, { useState, useContext } from "react";
+import React, {  useContext } from "react";
 import Home from "./pages/Home";
 import Wall from "./pages/Wall";
 import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
-import { auth, signInWithGoogle, generateUserDocument } from "./firebase";
+import { signInWithGoogle } from "./firebase";
 import { SearchProvider } from "./context/SearchContext";
 import {UserContext} from './context/UserProvider'
-import { ThemeProvider, ThemeContext } from "./context/ThemeProvider";
+import { ThemeProvider } from "./context/ThemeProvider";
 import { Grid, GridBody, GridSideNavbar, GridNavbar } from "./components/Grid";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";

@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
-import { SearchContext, SearchDispatch } from "../context/SearchContext";
+// import { SearchContext, SearchDispatch } from "../context/SearchContext";
 import { ThemeDispatchContext, ThemeContext } from "../context/ThemeProvider";
 import { Badge } from "../components/StyledComponents";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 
@@ -76,11 +76,11 @@ const NavSections = styled.div`
 `;
 
 export default function Navbar() {
-  const { searchWord, setSearchWord } = useContext(SearchDispatch);
+  // const { searchWord, setSearchWord } = useContext(SearchDispatch);
   const { setTheme, setNavOpen } = useContext(ThemeDispatchContext);
   const { theme, navOpen } = useContext(ThemeContext);
-  const { setPage } = useContext(SearchContext);
-  const { setWallpapers } = useContext(SearchContext);
+  // const { setPage } = useContext(SearchContext);
+  // const { setWallpapers } = useContext(SearchContext);
 
   const [searchParam, setSearchParam] = useState('')
 
