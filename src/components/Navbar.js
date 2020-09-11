@@ -114,11 +114,11 @@ export default function Navbar() {
     <div>
       <NavbarTop>
         
-        <div>
+        <div style={{display: 'flex'}}>
           <div>
-            <i onClick={()=>{setNavOpen(!navOpen)}} className="fas fa-bars"></i>
+            <i style={{width: '30px',height: '100%', cursor: 'pointer', lineHeight: '50%',fontSize: '1.2rem', marginRight: '3rem'}} onClick={()=>{setNavOpen(!navOpen)}} className="fas fa-bars"></i>
           </div>
-          <Link to="/">Wallparadise</Link>
+          <Link to="/" style={{fontWeight:'900',textTransform: 'capitalize',letterSpacing:'1.2px',fontSize:'1.2rem',color:'#000',textDecoration:'none'}}>Wallparadise</Link>
         </div>
         <form onSubmit={handleForm}>
           <InputSearch onChange={handleInput} placeholder='Search something...' />

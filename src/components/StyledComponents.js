@@ -1,7 +1,26 @@
 import React from "react";
 import styled from "styled-components";
 
-const ButtonDiv = styled.div``;
+const ButtonDiv = styled.button`
+  border: none;
+  padding: .4rem 1.2rem;
+  background:red;
+  color: #fff;
+  font-weight:400;
+  letter-spacing:1.2px;
+  display:flex;
+  justify-content:center;
+  align-items: center;
+  cursor: pointer;
+  margin-right: .5rem;
+  max-width: 210px;
+  height: 40px;
+  text-align: center;
+
+  * > {
+    margin: 0rem .2rem;
+  }
+`;
 
 const handleGrid = (type) => {
   switch (type) {
@@ -80,7 +99,7 @@ const SectionHeaderComponent = styled.div`
 `;
 
 export function Button(props) {
-  return <ButtonDiv align={props.align}>{props.children}</ButtonDiv>;
+  return <ButtonDiv onClick={props.onClick} align={props.align}>{props.children}</ButtonDiv>;
 }
 export function GridImagesWrapper(props) {
   return <GridImagesWrap type={props.type}>{props.children}</GridImagesWrap>;

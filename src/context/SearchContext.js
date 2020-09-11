@@ -1,10 +1,13 @@
-import React, { createContext, useState, useEffect } from 'react'
+import React, { createContext, useState, useEffect, useContext } from 'react'
+import {UserContext} from './UserProvider';
+import { generateFavsDocument } from '../firebase'
 import axios from 'axios'
 
 const SearchContext = createContext(undefined);
 const SearchDispatch = createContext(undefined);
 
 function SearchProvider ({children})  {
+   const  { user, loaded, favs} = useContext(UserContext)
     const [page, setPage] = useState(1);
     const [images, setImages] = useState([]);
     // const [imagesLoaded, setImagesLoaded] = useState(false);
@@ -14,11 +17,11 @@ function SearchProvider ({children})  {
     const [mostviewed, setMostViewed] = useState([]);
     const [mostViewedLoaded, setMostViewedLoaded] = useState(false);
     const [searchWord, setSearchWord] = useState('');
-    // const [fav, setFav] = useState([{id:'mdjwjy'},{id:'g8opp3'},{id:'5w2gg8'},{id:'96jdd8'},{id:'lmlg6q'}])
-    const [fav] = useState([{id:'mdjwjy'},{id:'g8opp3'},{id:'5w2gg8'},{id:'96jdd8'},{id:'lmlg6q'}])
+    
 
     const handleFavs = (arr) => {
-      let tempoArr = fav.forEach(f => {
+      console.log('favs..', favs)
+      let tempoArr = favs.forEach(f => {
         arr.forEach(item => item.id === f.id ? item.fav = true : null)
       })
 
@@ -63,15 +66,22 @@ function SearchProvider ({children})  {
     //       .catch((err) => console.log(err));
     //   };
 
-    useEffect(()=>{
-        getTopImages()
-        getMostViewed()
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
+    const firstLoadHome = async () => {
+         await getTopImages()
+         await getMostViewed()
+    }
 
+    useEffect(()=>{
+      if(loaded){
+        firstLoadHome()
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[loaded])
+
+    
     return(
     <SearchDispatch.Provider value={{setPage, setImages, setTopImages, setSearchWord, setMostViewed}}>
-        <SearchContext.Provider value={{page, fav, images, topImages, searchWord, mostviewed, imagesLoaded, topImagesLoaded, mostViewedLoaded}}>
+        <SearchContext.Provider value={{page, favs, images, topImages, searchWord, mostviewed, imagesLoaded, topImagesLoaded, mostViewedLoaded}}>
             {children}
         </SearchContext.Provider>
     </SearchDispatch.Provider>

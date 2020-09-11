@@ -4,8 +4,9 @@ import styled from "styled-components";
 
 const GridSystem = styled.div`
   width: 100%;
+  min-height: 100vh;
   display: grid;
-  transition: 3s all;
+  transition: .3s all;
   grid-template-areas:
    "header"
    "sidebar"
@@ -33,6 +34,7 @@ const GridNav = styled.div`
 const GridSideNav = styled.div`
   background: #3A3A3A;
   grid-area: sidebar;
+  display:${props => props.navOpen ? 'block' :'none'};
 `;
 
 const GridBo = styled.div`
@@ -40,17 +42,20 @@ const GridBo = styled.div`
   grid-area: content;
 `;
 
+
+
+
 export function Grid(props) {
   const { navOpen } = useContext(ThemeContext)
-
-
   return <GridSystem navOpen={navOpen}>{props.children}</GridSystem>;
 }
 export function GridNavbar(props) {
   return <GridNav>{props.children}</GridNav>;
 }
 export function GridSideNavbar(props) {
-  return <GridSideNav>{props.children}</GridSideNav>;
+  const { navOpen } = useContext(ThemeContext)
+
+  return <GridSideNav navOpen={navOpen}>{props.children}</GridSideNav>;
 }
 export function GridBody(props) {
   return <GridBo>{props.children}</GridBo>;

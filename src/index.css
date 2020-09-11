@@ -4,3 +4,7 @@ body{
 }
 [data-reactroot] 
         {height: 100% !important; }
+
+.d-flex{
+  display: flex;
+}
