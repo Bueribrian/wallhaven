@@ -11,6 +11,8 @@ const CardWrapper = styled.div`
     z-index:2;
     transition: .3s all;
     overflow: hidden;
+    border: 1px solid #eeeeee5e;
+    box-shadow: 7px 2px 3px 1px #c2c2c21a;
     // border: ${props => props.fav ? '2px solid crimson' : '2px solid transparent'};
     &:hover .card-back{
         opacity:1;
@@ -110,7 +112,6 @@ export default function ImageComponent(props) {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    // console.log(props);
     setLoaded(true);
   }, []);
 

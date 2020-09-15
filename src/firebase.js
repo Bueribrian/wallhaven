@@ -49,7 +49,7 @@ export const generateFavsDocument = async (uid) => {
     return getFavDocument(uid)
 }
 
-export const getFavDocument = async(uid) => {
+const getFavDocument = async(uid) => {
     if(!uid) return null;
     try {
         const favDocument = await firestore.doc(`favs/${uid}`).get()

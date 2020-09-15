@@ -46,7 +46,7 @@ function Application() {
                   </div>
                 ) : (
                   <div>
-                    <img style={{width:'120px',height:'120px',borderRadius:'50%'}} src={user.photoURL}></img>
+                    <img style={{width:'120px',height:'120px',borderRadius:'50%'}} alt='profile' src={user.photoURL}></img>
                     <h1>Bienvenido {user.displayName || 'https://api.adorable.io/avatars/120/abott@adorable.png'}</h1>
                     <Button
                       onClick={() => {

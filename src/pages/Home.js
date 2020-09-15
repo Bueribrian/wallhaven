@@ -1,27 +1,31 @@
 import React, { useContext } from "react";
 import { SearchContext } from "../context/SearchContext";
-// import { ThemeContext } from "../context/ThemeProvider";
 import { Link } from "react-router-dom";
 import { SectionHeader } from '../components/StyledComponents'
 import Wallpapers from "../components/Wallpapers";
 
 export default function Home() {
   // const { images, mostviewed, topImages, topImagesLoaded,  mostViewedLoaded } = useContext(SearchContext)
-  const {  mostviewed, topImages, topImagesLoaded,  mostViewedLoaded } = useContext(SearchContext)
+  const {  images ,mostviewed, topImages, topImagesLoaded,  mostViewedLoaded, imagesLoaded } = useContext(SearchContext)
 
 
   return (
     <div>
-      <SectionHeader background='#6B2AB5' xaling='space-between' yaling='center' color='white'>
+      <SectionHeader background='patriarch' xaling='space-between' yaling='center' color='white'>
         <h2>Top images</h2>
         <Link to='/top'>View more</Link>
       </SectionHeader>
-      <Wallpapers type='top' loaded={topImagesLoaded} images={topImages} />
-      <SectionHeader background='#569FFF' xaling='space-between' yaling='center' color='white'>
+      <Wallpapers  type='top' loaded={topImagesLoaded} images={topImages} />
+      <SectionHeader background='viviDangerine' xaling='space-between' yaling='center' color='white'>
         <h2>Most viewed</h2>
         <Link to='/popular'>View more</Link>
       </SectionHeader>
-      <Wallpapers type='default' loaded={mostViewedLoaded} images={mostviewed} />
+      <Wallpapers size='8' type='default' loaded={mostViewedLoaded} images={mostviewed} />
+      <SectionHeader background='pacificBlue' xaling='space-between' yaling='center' color='white'>
+        <h2>General Images</h2> 
+        <Link to='/general'>View more</Link>
+      </SectionHeader>
+      <Wallpapers size='8' type='default' loaded={imagesLoaded} images={images} />
     </div>
   );
 }

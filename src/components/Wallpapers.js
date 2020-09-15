@@ -8,20 +8,28 @@ export default function Wallpapers(props) {
     return (index === 1 && type === 'top') || (index === 5 && type === 'top') ? image.path : image.thumbs.small
   }
 
+  let { type, loaded, images } = props
   
+  let size = props.size !== undefined ? parseInt(props.size) -1 : 23;
+  
+
+
   const ArrCards = (
     <>
-      {props.loaded ? props.images.map((section, key) => {
+      {loaded ? images.map((section, key) => {
         return (
-          <GridImagesWrapper type={props.type} key={key}>
+          <GridImagesWrapper type={type} key={key}>
             {section.map((image, index) => {
-              return (
-                <ImageComponent key={image.id} stats={image} image={handleImageThumbs(index,props.type, image)} />
-              );
+              if(size >= index){
+                return (
+                  <ImageComponent key={image.id} stats={image} image={handleImageThumbs(index,props.type, image)} />
+                );
+              }
+              return null
             })}
             </GridImagesWrapper>
         );
-      }):<GridWallLoader type={props.type}/>}
+      }):<GridWallLoader type={type}/>}
     </>
   );
 

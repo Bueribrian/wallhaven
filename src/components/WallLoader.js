@@ -12,7 +12,7 @@ const WallLoader = (props) => (
     foregroundColor="#e0e0e0"
     {...props}
   >
-    <rect x="0" y="0" rx="8" ry="8" width="320" height="220" />
+    <rect x="0" y="0" rx="0" ry="0" width="320" height="220" />
   </ContentLoader>
 )
 

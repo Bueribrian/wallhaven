@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import colorSchema from "../colorSchema"
 
 const ButtonDiv = styled.button`
   border: none;
@@ -25,7 +26,6 @@ const ButtonDiv = styled.button`
 const handleGrid = (type) => {
   switch (type) {
     case "top":
-      console.log("entre?");
       return `grid-template-columns: repeat(auto-fill, minmax(320px, 320px) ); 
               & div:nth-child(2){
                   grid-row: span 2;
@@ -43,12 +43,12 @@ const handleGrid = (type) => {
 const handleCategoryBadge = (category) => {
   switch(category) {
     case "anime":
-      return "green";
+      return colorSchema.buff;
     case "general":
-      return "salmon";
+      return colorSchema.blue;
 
     default:
-      return "crimson";
+      return colorSchema.blue;
   }
 }
 
@@ -82,7 +82,7 @@ const GridImagesWrap = styled.div`
 const SectionHeaderComponent = styled.div`
   width: 100%;
   height: 80px;
-  background: ${(props) => props.background};
+  background: ${(props) => colorSchema[props.background] || colorSchema.blue};
   display: flex;
   padding: 0rem 3em;
   justify-content: ${(props) => props.xaling};
@@ -121,7 +121,7 @@ export function SectionHeader({ background, xaling, yaling, color, children }) {
       yaling={yaling}
       color={color}
     >
-      {children}
+        {children}
     </SectionHeaderComponent>
   );
 }
