@@ -2,20 +2,41 @@ import React from "react";
 import styled from "styled-components";
 import colorSchema from "../colorSchema"
 
+const handleBackground = (bg) => {
+  let background = bg
+  switch(bg){
+    case 'warning':
+      background = '#fffb17';
+      break;
+    case 'info':
+      background = '#17aaff';
+      break;
+    case 'danger':
+      background = '#fc4e42';
+      break
+    case 'success':
+      background = '#17ff9e';
+      break;
+
+    default:
+      background = '#5e5e5e';
+      break;
+  }
+
+  return background
+}
+
+
 const ButtonDiv = styled.button`
+  background:${(props) => handleBackground(props.background)};
   border: none;
-  padding: .4rem 1.2rem;
-  background:red;
+  padding: 12px 28px;
   color: #fff;
   font-weight:400;
   letter-spacing:1.2px;
-  display:flex;
-  justify-content:center;
-  align-items: center;
+  display:inline-block;
   cursor: pointer;
   margin-right: .5rem;
-  max-width: 210px;
-  height: 40px;
   text-align: center;
 
   * > {
@@ -73,8 +94,9 @@ const GridImagesWrap = styled.div`
   max-width: 1500px;
   margin: 1rem auto;
   display: grid;
-  grid-gap: 0.4rem;
+  grid-gap: 0.1rem;
   justify-content: center;
+  aling-items: center;
   grid-auto-rows: 220px;
   ${(props) => handleGrid(props.type)}
 `;
@@ -99,7 +121,7 @@ const SectionHeaderComponent = styled.div`
 `;
 
 export function Button(props) {
-  return <ButtonDiv onClick={props.onClick} align={props.align}>{props.children}</ButtonDiv>;
+  return <ButtonDiv onClick={props.onClick} background={props.background} align={props.align}>{props.children}</ButtonDiv>;
 }
 export function GridImagesWrapper(props) {
   return <GridImagesWrap type={props.type}>{props.children}</GridImagesWrap>;

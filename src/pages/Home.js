@@ -13,17 +13,17 @@ export default function Home() {
     <div>
       <SectionHeader background='patriarch' xaling='space-between' yaling='center' color='white'>
         <h2>Top images</h2>
-        <Link to='/top'>View more</Link>
+        <Link to='/search/top'>View more</Link>
       </SectionHeader>
       <Wallpapers  type='top' loaded={topImagesLoaded} images={topImages} />
       <SectionHeader background='viviDangerine' xaling='space-between' yaling='center' color='white'>
         <h2>Most viewed</h2>
-        <Link to='/popular'>View more</Link>
+        <Link to='/search/mostViewed'>View more</Link>
       </SectionHeader>
       <Wallpapers size='8' type='default' loaded={mostViewedLoaded} images={mostviewed} />
       <SectionHeader background='pacificBlue' xaling='space-between' yaling='center' color='white'>
         <h2>General Images</h2> 
-        <Link to='/general'>View more</Link>
+        <Link to='search/general'>View more</Link>
       </SectionHeader>
       <Wallpapers size='8' type='default' loaded={imagesLoaded} images={images} />
     </div>

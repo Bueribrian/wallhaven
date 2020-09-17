@@ -32,7 +32,7 @@ const GridNav = styled.div`
   grid-area: header;
 `;
 const GridSideNav = styled.div`
-  background: #3A3A3A;
+  background: #eee;
   grid-area: sidebar;
   display:${props => props.navOpen ? 'block' :'none'};
 `;

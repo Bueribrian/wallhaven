@@ -1,9 +1,9 @@
 const colorScheme = {
-  blue: "#235789",
-  buff: "#f3de8a",
-  viviDangerine: "#eb9486",
-  patriarch: "#7b1e7a",
-  pacificBlue: "#47a8bd",
+  blue: "#340068",
+  buff: "#FF6978",
+  viviDangerine: "#B1EDE8",
+  patriarch: "#6D435A ",
+  pacificBlue: "#7880B5",
 };
 
 export default colorScheme;

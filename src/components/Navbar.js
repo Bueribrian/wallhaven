@@ -5,27 +5,13 @@ import { ThemeDispatchContext, ThemeContext } from "../context/ThemeProvider";
 import { Badge } from "../components/StyledComponents";
 import { Link } from "react-router-dom";
 
-
-
-const NavbarTop = styled.div `
+const NavbarTop = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 60px;
   padding: 0px 15px;
-`
-
-const InputSearch = styled.input`
- max-width: 520px;
- min-width: 300px;
- padding: 0px 15px;
- height: 40px;
- background: rgba(0,0,0,0.2);
- border:none;
- font-family: 'Raleway', sans-serif;
- 
-`
-
+`;
 
 const ThemePicker = styled.div`
   position: relative;
@@ -82,8 +68,9 @@ export default function Navbar() {
   // const { setPage } = useContext(SearchContext);
   // const { setWallpapers } = useContext(SearchContext);
 
-  const [searchParam, setSearchParam] = useState('')
-
+  const [searchParam, setSearchParam] = useState("");
+  const [recordSearch, setRecordSearch] = useState([]);
+  const [recordSearchFocus, setRecordSearchFocus] = useState(false);
   const changeTheme = () => {
     if (theme === "dark") {
       setTheme("light");
@@ -98,31 +85,132 @@ export default function Navbar() {
   //   setPage(1);
   // };
 
-  const handleForm = (e) => {
-    console.log('Preveni el default?')
-    window.location.href=`/search/top/${searchParam}`
-    e.preventDefault()
-  }
+  const saveRecordSearch = (param) => {
+    console.log("guardando" + param);
+    let record = localStorage.getItem("RecordSearch");
+    if (param.length <= 0 || param === "") {
+      return;
+    }
+    if (record) {
+      record = [...JSON.parse(record), param];
+      console.log(record);
+      localStorage.setItem("RecordSearch", JSON.stringify(record.reverse()));
+    } else {
+      localStorage.setItem("RecordSearch", JSON.stringify([param]));
+    }
+  };
 
-  const handleInput = (e) => {
-    setSearchParam(e.target.value)
+  const getRecordSearch = () => {
+    let record = JSON.parse(localStorage.getItem("RecordSearch"));
+    setRecordSearch(record);
+    console.log(record);
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Preveni el default?");
+    // window.location.href = `/search/top/${searchParam}`;
+    saveRecordSearch(searchParam);
+    getRecordSearch();
+    window.location.href=`/search/general/${searchParam}`;
+  };
+
+  const deteleRecordItem = (param) => {
+    let record = JSON.parse(localStorage.getItem("RecordSearch"));
+    let filteredRecords = record.filter((r) => r !== param);
+    localStorage.setItem("RecordSearch", JSON.stringify(filteredRecords));
+    getRecordSearch();
+  };
+
+  const handleAutoComplete = (record) => {
+    window.location.href=`/search/general/${record}`;
   }
 
+  // const SearcherComponent = () => {
+  //   return (
+
+  //   );
+  // };
 
   return (
     <div>
       <NavbarTop>
-        
-        <div style={{display: 'flex'}}>
+        <div style={{ display: "flex" }}>
           <div>
-            <i style={{width: '30px',height: '100%', cursor: 'pointer', lineHeight: '50%',fontSize: '1.2rem', marginRight: '3rem'}} onClick={()=>{setNavOpen(!navOpen)}} className="fas fa-bars"></i>
+            <i
+              style={{
+                width: "30px",
+                height: "100%",
+                cursor: "pointer",
+                lineHeight: "50%",
+                fontSize: "1.2rem",
+                marginRight: "3rem",
+              }}
+              onClick={() => {
+                setNavOpen(!navOpen);
+              }}
+              className="fas fa-bars"
+            ></i>
           </div>
-          <Link to="/" style={{fontWeight:'900',textTransform: 'capitalize',letterSpacing:'1.2px',fontSize:'1.2rem',color:'#000',textDecoration:'none'}}>Wallparadise</Link>
+          <Link
+            to="/"
+            style={{
+              fontSize: "1.2rem",
+              color: "#000",
+              textDecoration: "none",
+            }}
+          >
+            Wallparadise
+          </Link>
         </div>
-        <form onSubmit={handleForm}>
-          <InputSearch onChange={handleInput} placeholder='Search something...' />
+        <form
+          onFocus={(e) => {
+            setRecordSearchFocus(true);
+            getRecordSearch();
+          }}
+          className="searcher"
+          onSubmit={handleSubmit}
+        >
+          <input
+            type="text"
+            value={searchParam}
+            onChange={(e) => {
+              setSearchParam(e.target.value);
+            }}
+            placeholder="Search something..."
+          />
+
+          {recordSearchFocus ? (
+            <ul
+              className="searchHistory"
+              onMouseLeave={() => setRecordSearchFocus(false)}
+            >
+              
+              {recordSearch.length > 0
+                ? <><small>Busquedas recientes:</small>{recordSearch.map((record) => (
+                    <li className="searchRecordItem">
+                      <span
+                        onClick={(e) => {
+                          handleAutoComplete(e.target.textContent)
+                        }}
+                      >
+                        {record}
+                      </span>{" "}
+                      <i
+                        className="fas fa-times"
+                        onClick={() => {
+                          deteleRecordItem(record);
+                        }}
+                      ></i>
+                    </li>
+                  ))
+                      }</>: "No hay busquedas recientes"}
+            </ul>
+          ) : (
+            ""
+          )}
         </form>
+
         <ThemePicker
           onClick={changeTheme}
           className={theme === "light" ? "active" : ""}
@@ -132,20 +220,18 @@ export default function Navbar() {
         </ThemePicker>
       </NavbarTop>
 
-
-
       <NavSections>
         <Badge background="#6B2AB5">
-          <Link to="/top">Top</Link>
+          <Link to="/search/top">Top</Link>
         </Badge>
         <Badge background="#39F66C">
-          <Link to="/top">Most viewed</Link>
+          <Link to="/search/mostViewed">Most viewed</Link>
         </Badge>
         <Badge background="#F639F6">
-          <Link to="/top">Anime</Link>
+          <Link to="/search/top/anime">Anime</Link>
         </Badge>
         <Badge background="#FFB07B">
-          <Link to="/top">General</Link>
+          <Link to="/search/general">General</Link>
         </Badge>
       </NavSections>
     </div>

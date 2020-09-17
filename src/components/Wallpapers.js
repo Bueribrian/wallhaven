@@ -12,7 +12,7 @@ export default function Wallpapers(props) {
   
   let size = props.size !== undefined ? parseInt(props.size) -1 : 23;
   
-
+  console.log(images)
 
   const ArrCards = (
     <>
