@@ -1,46 +1,45 @@
 import React from "react";
 import styled from "styled-components";
-import colorSchema from "../colorSchema"
+import colorSchema from "../colorSchema";
 
 const handleBackground = (bg) => {
-  let background = bg
-  switch(bg){
-    case 'warning':
-      background = '#fffb17';
+  let background = bg;
+  switch (bg) {
+    case "warning":
+      background = "#fffb17";
       break;
-    case 'info':
-      background = '#17aaff';
+    case "info":
+      background = "#17aaff";
       break;
-    case 'danger':
-      background = '#fc4e42';
-      break
-    case 'success':
-      background = '#17ff9e';
+    case "danger":
+      background = "#fc4e42";
+      break;
+    case "success":
+      background = "#17ff9e";
       break;
 
     default:
-      background = '#5e5e5e';
+      background = "#5e5e5e";
       break;
   }
 
-  return background
-}
-
+  return background;
+};
 
 const ButtonDiv = styled.button`
-  background:${(props) => handleBackground(props.background)};
+  background: ${(props) => handleBackground(props.background)};
   border: none;
   padding: 12px 28px;
   color: #fff;
-  font-weight:400;
-  letter-spacing:1.2px;
-  display:inline-block;
+  font-weight: 400;
+  letter-spacing: 1.2px;
+  display: inline-block;
   cursor: pointer;
-  margin-right: .5rem;
+  margin-right: 0.5rem;
   text-align: center;
 
   * > {
-    margin: 0rem .2rem;
+    margin: 0rem 0.2rem;
   }
 `;
 
@@ -62,7 +61,7 @@ const handleGrid = (type) => {
 };
 
 const handleCategoryBadge = (category) => {
-  switch(category) {
+  switch (category) {
     case "anime":
       return colorSchema.buff;
     case "general":
@@ -71,10 +70,10 @@ const handleCategoryBadge = (category) => {
     default:
       return colorSchema.blue;
   }
-}
+};
 
 const BadgeComponent = styled.div`
-  width:fit-content;
+  width: fit-content;
   padding: 0.3rem 0.5rem;
   text-align: center;
   color: #fff;
@@ -84,10 +83,10 @@ const BadgeComponent = styled.div`
 
   & a {
     text-decoration: none;
-    color: ${props => props.color ? props.color : '#fff'}
+    color: ${(props) => (props.color ? props.color : "#fff")};
   }
-  background:${props => props.category ? handleCategoryBadge(props.category) : props.background};
-
+  background: ${(props) =>
+    props.category ? handleCategoryBadge(props.category) : props.background};
 `;
 
 const GridImagesWrap = styled.div`
@@ -121,7 +120,15 @@ const SectionHeaderComponent = styled.div`
 `;
 
 export function Button(props) {
-  return <ButtonDiv onClick={props.onClick} background={props.background} align={props.align}>{props.children}</ButtonDiv>;
+  return (
+    <ButtonDiv
+      onClick={props.onClick}
+      background={props.background}
+      align={props.align}
+    >
+      {props.children}
+    </ButtonDiv>
+  );
 }
 export function GridImagesWrapper(props) {
   return <GridImagesWrap type={props.type}>{props.children}</GridImagesWrap>;
@@ -143,7 +150,7 @@ export function SectionHeader({ background, xaling, yaling, color, children }) {
       yaling={yaling}
       color={color}
     >
-        {children}
+      {children}
     </SectionHeaderComponent>
   );
 }

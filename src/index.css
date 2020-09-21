@@ -5,12 +5,7 @@ body{
 [data-reactroot] 
         {height: 100% !important; }
 
-.container{
-  max-width: 1240px;
-  margin-right: auto;
-  margin-left: auto;
-  width: 100%;
-}
+
 
 .d-flex{
   display: flex;
@@ -68,6 +63,7 @@ body{
   overflow-y: scroll;
   padding: .3em .4rem .5rem .4rem;
   font-size: .9rem;
+  z-index: 99;
 }
 
 .profile{

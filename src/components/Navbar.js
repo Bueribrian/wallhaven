@@ -102,8 +102,8 @@ export default function Navbar() {
 
   const getRecordSearch = () => {
     let record = JSON.parse(localStorage.getItem("RecordSearch"));
-    setRecordSearch(record);
-    console.log(record);
+    console.log(record || []);
+    setRecordSearch(record || []);
   };
 
   const handleSubmit = (e) => {
@@ -112,7 +112,7 @@ export default function Navbar() {
     // window.location.href = `/search/top/${searchParam}`;
     saveRecordSearch(searchParam);
     getRecordSearch();
-    window.location.href=`/search/general/${searchParam}`;
+    window.location.href = `/search/general/${searchParam}`;
   };
 
   const deteleRecordItem = (param) => {
@@ -123,8 +123,8 @@ export default function Navbar() {
   };
 
   const handleAutoComplete = (record) => {
-    window.location.href=`/search/general/${record}`;
-  }
+    window.location.href = `/search/general/${record}`;
+  };
 
   // const SearcherComponent = () => {
   //   return (
@@ -185,13 +185,14 @@ export default function Navbar() {
               className="searchHistory"
               onMouseLeave={() => setRecordSearchFocus(false)}
             >
-              
-              {recordSearch.length > 0
-                ? <><small>Busquedas recientes:</small>{recordSearch.map((record) => (
+              {recordSearch.length > 0 ? (
+                <>
+                  <small>Busquedas recientes:</small>
+                  {recordSearch.map((record) => (
                     <li className="searchRecordItem">
                       <span
                         onClick={(e) => {
-                          handleAutoComplete(e.target.textContent)
+                          handleAutoComplete(e.target.textContent);
                         }}
                       >
                         {record}
@@ -203,8 +204,11 @@ export default function Navbar() {
                         }}
                       ></i>
                     </li>
-                  ))
-                      }</>: "No hay busquedas recientes"}
+                  ))}
+                </>
+              ) : (
+                "No hay busquedas recientes"
+              )}
             </ul>
           ) : (
             ""
