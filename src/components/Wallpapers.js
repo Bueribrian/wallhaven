@@ -40,7 +40,7 @@ export default function Wallpapers(props) {
           );
         })
       ) : 
-        (images.length === 0 ? 'No hay imagenes' : <GridWallLoader type={type} /> )
+        ((images.length  === 0 && loaded) ? 'No hay imagenes' : <GridWallLoader type={type} /> )
         
       }
     </>

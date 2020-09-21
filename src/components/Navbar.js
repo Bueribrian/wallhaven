@@ -3,7 +3,7 @@ import styled from "styled-components";
 // import { SearchContext, SearchDispatch } from "../context/SearchContext";
 import { ThemeDispatchContext, ThemeContext } from "../context/ThemeProvider";
 import { Badge } from "../components/StyledComponents";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const NavbarTop = styled.div`
   display: flex;
@@ -62,6 +62,7 @@ const NavSections = styled.div`
 `;
 
 export default function Navbar() {
+  const history = useHistory();
   // const { searchWord, setSearchWord } = useContext(SearchDispatch);
   const { setTheme, setNavOpen } = useContext(ThemeDispatchContext);
   const { theme, navOpen } = useContext(ThemeContext);
@@ -107,12 +108,13 @@ export default function Navbar() {
   };
 
   const handleSubmit = (e) => {
+    
     e.preventDefault();
     console.log("Preveni el default?");
     // window.location.href = `/search/top/${searchParam}`;
     saveRecordSearch(searchParam);
     getRecordSearch();
-    window.location.href = `/search/general/${searchParam}`;
+    history.push(`/search/general/${searchParam}`);
   };
 
   const deteleRecordItem = (param) => {
