@@ -47,23 +47,45 @@ body{
   display: flex;
   justify-content:center;
   align-items:center;
+  background: #E9E9E9;
+  padding: .3rem;
 }
 .searcher input {
   width: 100%;
+  height: 100%;
+  padding: 16px;
+  font-family: 'Raleway', sans-serif;
+  border: none;
+  outline: none;
+  z-index: 30;
+  border-radius: 8px;
+}
+.searcher input:focus, .searcher input:active{
+  background: rgb(68, 68, 68);
+  color: #fff;
+  outline: none;
+  /* border: 2px solid purple; */
 }
 .searchHistory{
   position: absolute;
-  bottom: 0px;
+  bottom: 40px;
   transform:translateY(100%);
-  background: #eee;
-  border: 1px solid black;
+  background: rgb(36, 36, 36);
+  color: #fff;
+  /* border: 1px solid rgb(192, 192, 192); */
+  font-family: 'Raleway', sans-serif;
+  font-weight: 200;
   max-height: 200px;
-  min-height: 120px;
+  min-height: 30px;
   width: 100%;
-  overflow-y: scroll;
-  padding: .3em .4rem .5rem .4rem;
+  padding: 45px .4rem .5rem .4rem;
   font-size: .9rem;
-  z-index: 99;
+  z-index: 20;
+  box-shadow: 3px 3px 5px rgba(0,0,0,0.3);
+  /* border: 2px solid #6d435a9e; */
+}
+.searchHistory li{
+  border-radius: 4px;
 }
 
 .profile{
@@ -91,17 +113,28 @@ body{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px;
+  padding: 5px 10px;
+  margin: 6px 0px;
+  transition: .3s all;
+
+  cursor: pointer;
+}
+.searchRecordItem span{
+  width: 100%;
+}
+.searchRecordItem:hover{
+  background: rgb(63, 63, 63);
+  transition: .3s all;
+  color: #fff;
+  
 }
 .searchRecordItem i{
   cursor: pointer;
-  transform: translateX(30%);
   opacity: 0;
-  transition: .3s all;
+  transition: .2s all;
 }
 .searchRecordItem:hover i, .searchRecordItem:focus i{
-  transform: translateX(0%);
   opacity: 1;
-  transition: .3s all;
+  transition: .2s all;
 
 }

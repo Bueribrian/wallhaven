@@ -49,7 +49,7 @@ export default function Home() {
         color="white"
       >
         <h2>General Images</h2>
-        <Link to="search/general">View more</Link>
+        <Link to="/search/general">View more</Link>
       </SectionHeader>
       <Wallpapers
         size="8"

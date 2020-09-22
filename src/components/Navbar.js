@@ -87,15 +87,14 @@ export default function Navbar() {
   // };
 
   const saveRecordSearch = (param) => {
-    console.log("guardando" + param);
     let record = localStorage.getItem("RecordSearch");
     if (param.length <= 0 || param === "") {
       return;
     }
     if (record) {
-      record = [...JSON.parse(record), param];
-      console.log(record);
-      localStorage.setItem("RecordSearch", JSON.stringify(record.reverse()));
+      let listRecords = JSON.parse(record);
+      if(listRecords.indexOf(param) === -1) listRecords.unshift(param)
+      localStorage.setItem("RecordSearch", JSON.stringify(listRecords));
     } else {
       localStorage.setItem("RecordSearch", JSON.stringify([param]));
     }
@@ -103,14 +102,12 @@ export default function Navbar() {
 
   const getRecordSearch = () => {
     let record = JSON.parse(localStorage.getItem("RecordSearch"));
-    console.log(record || []);
     setRecordSearch(record || []);
   };
 
   const handleSubmit = (e) => {
     
     e.preventDefault();
-    console.log("Preveni el default?");
     // window.location.href = `/search/top/${searchParam}`;
     saveRecordSearch(searchParam);
     getRecordSearch();
@@ -125,7 +122,7 @@ export default function Navbar() {
   };
 
   const handleAutoComplete = (record) => {
-    window.location.href = `/search/general/${record}`;
+    history.push(`/search/general/${record}`);
   };
 
   // const SearcherComponent = () => {
@@ -191,10 +188,11 @@ export default function Navbar() {
                 <>
                   <small>Busquedas recientes:</small>
                   {recordSearch.map((record) => (
-                    <li className="searchRecordItem">
+                    <li key={record} className="searchRecordItem">
                       <span
                         onClick={(e) => {
                           handleAutoComplete(e.target.textContent);
+                          setSearchParam(e.target.textContent)
                         }}
                       >
                         {record}

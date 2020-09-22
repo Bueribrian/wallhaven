@@ -49,7 +49,6 @@ export default function Wall() {
     axios
       .get(`https://wallhaven-api.herokuapp.com/search/wall/${wallid}`)
       .then((response) => {
-        console.log(response.data.data);
         return setWallpaperData({ loaded: true, data: response.data.data });
       })
       .catch((err) => console.log(err));

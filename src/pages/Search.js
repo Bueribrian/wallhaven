@@ -14,7 +14,6 @@ const loadingStatus = "LOADING";
 const finishedStatus = "FINISHED";
 
 const infiniteScrollReducer = (state, action) => {
-  console.log("state ", state);
   switch (state.status) {
     case idleStatus:
     case errorStatus:
@@ -75,9 +74,7 @@ export default function Search() {
           state.pageNumber
         }&qs=${searchWord || ""}`
       );
-      console.log(res.status);
       if (res.status === 200) {
-        console.log("entre");
         const imgs = await res.data.data;
         if (imgs.length === 0) {
           return dispatch({ type: reachedEnd });
@@ -133,7 +130,6 @@ export default function Search() {
   }
 
   function renderImages() {
-    console.log("HAAAAAAAAAAAA", state.imgs);
     return <Wallpapers loaded={true} size="23" images={state.imgs} />;
   }
 

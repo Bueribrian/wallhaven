@@ -18,7 +18,6 @@ import "./App.css";
 function Application() {
   const { user } = useContext(UserContext);
 
-  console.log("user...", user);
 
   return (
     <div>

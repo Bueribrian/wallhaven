@@ -16,7 +16,6 @@ class UserProvider extends Component {
   
   componentDidMount = async () => {
     auth.onAuthStateChanged(async userAuth => {
-      console.log(userAuth)
       const user = await generateUserDocument(userAuth);
       const favs = await generateFavsDocument(userAuth ? userAuth.uid : null)
       await this.setState({ user, loaded: true, favs: favs ? favs.images : [] });
