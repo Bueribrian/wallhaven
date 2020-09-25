@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { SearchContext } from "../context/SearchContext";
 import { Link } from "react-router-dom";
 import { SectionHeader } from "../components/StyledComponents";
@@ -13,7 +13,10 @@ export default function Home() {
     topImagesLoaded,
     mostViewedLoaded,
     imagesLoaded,
+    favs
   } = useContext(SearchContext);
+
+  useEffect(() => {},[favs])
 
   return (
     <div>
@@ -26,7 +29,7 @@ export default function Home() {
         <h2>Top images</h2>
         <Link to="/search/top">View more</Link>
       </SectionHeader>
-      <Wallpapers type="top" loaded={topImagesLoaded} images={topImages} />
+      <Wallpapers type="top" load={topImagesLoaded} images={topImages} />
       <SectionHeader
         background="viviDangerine"
         xaling="space-between"
@@ -39,7 +42,7 @@ export default function Home() {
       <Wallpapers
         size="8"
         type="default"
-        loaded={mostViewedLoaded}
+        load={mostViewedLoaded}
         images={mostviewed}
       />
       <SectionHeader
@@ -54,7 +57,7 @@ export default function Home() {
       <Wallpapers
         size="8"
         type="default"
-        loaded={imagesLoaded}
+        load={imagesLoaded}
         images={images}
       />
     </div>

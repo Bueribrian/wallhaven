@@ -4,6 +4,7 @@ import Wall from "./pages/Wall";
 import NotFound from "./pages/NotFound";
 import Search from "./pages/Search";
 import Navbar from "./components/Navbar";
+import Favorites from './pages/Favorites'
 import { Link } from "react-router-dom";
 import { signInWithGoogle, singOutWithGoogle } from "./firebase";
 import { SearchProvider } from "./context/SearchContext";
@@ -52,14 +53,14 @@ function Application() {
                     </div>
                     <div className="signUp-normal my-2">
                       <h3>Sign up with wallparadise account</h3>{" "}
-                      <Button>
                         <Link
                           style={{ textDecoration: "none", color: "#fff" }}
                           to="signup"
                         >
+                      <Button>
                           sign up
-                        </Link>
                       </Button>
+                        </Link>
                     </div>
                   </div>
                 ) : (
@@ -75,9 +76,11 @@ function Application() {
                     <p className="profile-name">Bienvenido</p>
                     <b>{user.displayName}</b>
                     <div>
+                        <Link to='/favorites' style={{ textDecoration: "none", color: "#fff" }}>
                       <Button>
-                        See my favorites <i className="fa fa-heart"></i>
+                          See my favorites <i className="fa fa-heart"></i>
                       </Button>
+                        </Link>
                     </div>
                     <div>
                       <Button
@@ -96,10 +99,15 @@ function Application() {
                 <Switch>
                   <Route exact path="/" component={Home} />
                   <Route path="/wall/:wallid" component={Wall} />
-                  <Route
-                    path="/search/:topic?/:searchWord?"
+                  <Route  
+                    exact
+                    path="/search/:topic/:searchWord?"
                     component={Search}
                   />
+                  <Route
+                    path="/favorites"
+                    component={Favorites} 
+                    />
                   <Route component={NotFound} />
                 </Switch>
               </GridBody>

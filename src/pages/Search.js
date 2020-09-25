@@ -84,7 +84,7 @@ export default function Search() {
         dispatch({ type: errorFetch });
       }
     } catch (e) {
-      // dispatch({type: errorFetch})
+      dispatch({type: errorFetch})
     }
   };
 
@@ -97,13 +97,6 @@ export default function Search() {
 
   return (
     <div id="wallpapers-container">
-      {/* Buscando por {searchWord} {topic ? `topic: ${topic}` : ""}
-      {loaded ? (
-        <Wallpapers size="23" images={images} loaded={loaded} />
-      ) : (
-        "cargando..."
-      )}
-      <button onClick={() => setPage(page + 1)}>Load page {page}</button> */}
       {renderImages()}
       {state.status === errorStatus && renderErrorRetryButton()}
       {state.status === loadingStatus && renderLoadingMessage()}
@@ -130,7 +123,7 @@ export default function Search() {
   }
 
   function renderImages() {
-    return <Wallpapers loaded={true} size="23" images={state.imgs} />;
+    return <Wallpapers load={true} size="23" images={state.imgs} />;
   }
 
   function renderErrorRetryButton() {

@@ -108,7 +108,8 @@ function Card({ src, views, resolution, id, category, fav }) {
 }
 
 export default function ImageComponent(props) {
-  const { resolution, views, category, id, fav } = props.stats
+  const { resolution, views, category, id } = props.stats
+  const { fav } = props
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {

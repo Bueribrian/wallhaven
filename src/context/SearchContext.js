@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react'
 import {UserContext} from './UserProvider';
+
 // import { generateFavsDocument } from '../firebase'
 import axios from 'axios'
 
@@ -7,7 +8,7 @@ const SearchContext = createContext(undefined);
 const SearchDispatch = createContext(undefined);
 
 function SearchProvider ({children})  {
-   const  { loaded, favs} = useContext(UserContext)
+    const  {loaded, favs} = useContext(UserContext)
     const [page, setPage] = useState(1);
     const [images, setImages] = useState([]);
     const [imagesLoaded, setImagesLoaded] = useState(false);
@@ -18,19 +19,19 @@ function SearchProvider ({children})  {
     const [searchWord, setSearchWord] = useState('');
     
 
-    const handleFavs = (arr) => {
-      let tempoArr = favs.forEach(f => {
-        arr.forEach(item => item.id === f.id ? item.fav = true : null)
-      })
+    // const handleFavs = (arr) => {
+    //   let tempoArr = favs.forEach(f => {
+    //     arr.forEach(item => item.id === f.id ? item.fav = true : item.fav = false)
+    //   })
 
-      return tempoArr
-    }
+    //   return tempoArr
+    // }
 
     const getMostViewed = (page = 1, query=' ') => {
       axios
       .get(`https://wallhaven-api.herokuapp.com/search/mostviewed?page=${page}&qs=${query}`)
       .then((response) => {
-        handleFavs(response.data.data)
+        // handleFavs(response.data.data)
         setMostViewed([...mostviewed, response.data.data])
         setMostViewedLoaded(true)
       })
@@ -41,7 +42,7 @@ function SearchProvider ({children})  {
         axios
           .get(`https://wallhaven-api.herokuapp.com/search/top?page=${page}&qs=${query}`)
           .then((response) => {
-            handleFavs(response.data.data)
+            // handleFavs(response.data.data)
             setTopImages([...topImages, response.data.data.slice(11,19)])
             setTopImagesLoaded(true)
           })
@@ -52,7 +53,7 @@ function SearchProvider ({children})  {
         axios
           .get(`https://wallhaven-api.herokuapp.com/search?page=${page}&qs=${query}`)
           .then((response) => {
-            handleFavs(response.data.data)
+            // handleFavs(response.data.data)
             setImages([...images, response.data.data])
             setImagesLoaded(true)
           })
@@ -68,6 +69,7 @@ function SearchProvider ({children})  {
     useEffect(()=>{
       if(loaded){
         firstLoadHome()
+       
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     },[loaded])
@@ -75,7 +77,7 @@ function SearchProvider ({children})  {
     
     return(
     <SearchDispatch.Provider value={{setPage, setImages, setTopImages, setSearchWord, setMostViewed}}>
-        <SearchContext.Provider value={{page, favs, images, topImages, searchWord, mostviewed, imagesLoaded, topImagesLoaded, mostViewedLoaded}}>
+        <SearchContext.Provider value={{loaded, page, favs, images, topImages, searchWord, mostviewed, imagesLoaded, topImagesLoaded, mostViewedLoaded}}>
             {children}
         </SearchContext.Provider>
     </SearchDispatch.Provider>

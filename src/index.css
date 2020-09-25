@@ -5,7 +5,11 @@ body{
 [data-reactroot] 
         {height: 100% !important; }
 
-
+.container{
+  max-width: 1140px;
+  width: 100%;
+  margin: 0 auto;
+}
 
 .d-flex{
   display: flex;

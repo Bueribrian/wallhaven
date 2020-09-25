@@ -61,6 +61,37 @@ const getFavDocument = async(uid) => {
         console.error("Error fetching Favorites", error)
     }
 }
+
+export const removeFavorite = async (uid,wall) => {
+  if(!uid) return null;
+  
+  try {
+    const favDocument = await firestore.doc(`favs/${uid}`).get()
+    let documentExist = favDocument.data().images.filter(img => img.id !== wall.id)
+    await firestore.doc(`favs/${uid}`).set({
+        images: documentExist
+    })
+  } catch (error) {
+    console.error('Error to remove wallpaper of favorites', error)
+  }
+}
+
+export const addFavorite = async(uid,wall) => {
+  if(!uid) return null;
+  try{
+    const favDocument = await firestore.doc(`favs/${uid}`).get()
+    let documentExist = favDocument.data().images.filter(img => img.id === wall.id)
+    if(documentExist.length === 1){
+      return null
+    }else{
+      await firestore.doc(`favs/${uid}`).set({
+        images: [...favDocument.data().images, wall]
+      })
+    }
+  } catch (error) {
+    console.error("Error add wallpaper to Favorites", error)
+  }
+}
 // Genera un usuario
 export const generateUserDocument = async (user, additionalData) => {
   // Si se pasa un user null/undefinded, no hace nadad

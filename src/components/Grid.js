@@ -24,6 +24,7 @@ const GridSystem = styled.div`
         grid-template-areas:
                         "sidebar  header  header"
                         "sidebar content content";
+        grid-template-rows: 100px auto;
     }
 `;
 
@@ -35,6 +36,7 @@ const GridSideNav = styled.div`
   background: #eee;
   grid-area: sidebar;
   display:${props => props.navOpen ? 'block' :'none'};
+  box-shadow: inset -2px 4px 20px 0px rgba(0,0,0,0.3);
 `;
 
 const GridBo = styled.div`
