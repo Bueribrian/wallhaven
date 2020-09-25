@@ -6,7 +6,7 @@ body{
         {height: 100% !important; }
 
 .container{
-  max-width: 1140px;
+  max-width: 1400px;
   width: 100%;
   margin: 0 auto;
 }
@@ -19,7 +19,18 @@ body{
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
-
+.mr-2{
+  margin-right: 2rem;
+}
+.mb-2{
+  margin-bottom: 2rem;
+}
+.ml-2{
+  margin-left: 2rem;
+}
+.ml-1{
+  margin-left: .5rem;
+}
 .signUp{
   width: 100%;
   padding: 3em 2em;

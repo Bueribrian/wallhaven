@@ -97,7 +97,11 @@ export default function Wall() {
         <>
           {" "}
           <div className="wall-info">
-            <Link to='/'>Back to home</Link>
+            <Link to='/'> 
+              <Button background='info'>
+                <i className="fas fa-arrow-left mr-2"></i> Back to home
+              </Button>
+            </Link>
             <div>
               <div className="colors-boxes my-2" style={{ display: "flex" }}>
                 <h3>Colors:</h3>
@@ -131,8 +135,8 @@ export default function Wall() {
             </div>
           </div>
           <div className="wall-image">
-            <div>
-              { fav ? <button onClick={removeFav}>remove fav</button>:<button onClick={addFav}>add to fav</button>}
+            <div className='mb-2'>
+              { fav ? <Button onClick={removeFav}>remove fav  <i className="fas fa-heart-broken ml-1"></i> </Button>:<Button  background="danger" onClick={addFav}>add to fav <i className="fas fa-heart ml-1"></i></Button>}
             </div>
             <div style={{height: "706px",
     width: "100%",
